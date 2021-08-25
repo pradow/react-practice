@@ -1,17 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDom from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const data = {
+  title: "Code Coding Computer Data Developing Development",
+  image: "https://placedog.net/500/280",
+  user: "Nature Code",
+  views: "22k",
+  published: "9 months",
+  avatar: "https://placedog.net/210/167",
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function VideoList() {
+  return (
+    <div className="video-container">
+      <div className="video-image">
+        <img src={data.image} alt={data.title} />
+      </div>
+      <div className="video-info-container">
+        <div className="user-avatar">
+          <img src={data.avatar} alt={data.title} />
+        </div>
+        <div className="video-info">
+          <h4 className="video-title">{data.title}</h4>
+          <h4 className="video-user">{data.user}</h4>
+          <div className="video-stats">
+            <span className="video-views">{data.views} views</span>
+            <span className="video-published">{data.published}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDom.render(<VideoList />, document.querySelector("#root"));
