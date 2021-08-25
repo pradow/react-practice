@@ -47,13 +47,16 @@ function VideoList() {
 }
 
 function SingleVideo({ title, image, user, views, published, avatar }) {
+  const dogBark = () => {
+    alert(`${user} says WOOF!`);
+  };
   return (
     <div className="video-container">
-      <div className="video-image">
+      <div className="video-image" onClick={dogBark}>
         <img src={image} alt={title} />
       </div>
       <div className="video-info-container">
-        <div className="user-avatar">
+        <div className="user-avatar" onClick={dogBark}>
           <img src={avatar} alt={title} />
         </div>
         <div className="video-info">
