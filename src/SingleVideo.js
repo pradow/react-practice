@@ -1,6 +1,15 @@
 import React from "react";
 
-function SingleVideo({ title, image, user, views, published, avatar }) {
+function SingleVideo({
+  id,
+  title,
+  image,
+  user,
+  views,
+  published,
+  avatar,
+  deleteDog,
+}) {
   const dogBark = () => {
     alert(`${user} says WOOF!`);
   };
@@ -14,13 +23,16 @@ function SingleVideo({ title, image, user, views, published, avatar }) {
           <img src={avatar} alt={title} />
         </div>
         <div className="video-info">
-          <h4 className="video-title">{title}</h4>
+          <h4 className="video-title">
+            {id} {title}
+          </h4>
           <h4 className="video-user">{user}</h4>
           <div className="video-stats">
             <span className="video-views">{views} views</span>
             <span className="video-published">{published}</span>
           </div>
         </div>
+        <button onClick={() => deleteDog(id)}>Delete</button>
       </div>
     </div>
   );

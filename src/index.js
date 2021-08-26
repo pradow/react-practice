@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDom from "react-dom";
 import SingleVideo from "./SingleVideo";
 
 const data = [
   {
+    id: 1,
     title: "Code Coding Computer Data Developing Development",
     image: "https://placedog.net/500/280",
     user: "Nature Code",
@@ -12,6 +13,7 @@ const data = [
     avatar: "https://placedog.net/210/167",
   },
   {
+    id: 2,
     title: "Code Coding Computer Data Developing Development",
     image: "https://placedog.net/500/280",
     user: "Nature Code",
@@ -20,6 +22,7 @@ const data = [
     avatar: "https://placedog.net/210/167",
   },
   {
+    id: 3,
     title: "Code Coding Computer Data Developing Development",
     image: "https://placedog.net/500/280",
     user: "Nature Code",
@@ -28,6 +31,7 @@ const data = [
     avatar: "https://placedog.net/210/167",
   },
   {
+    id: 4,
     title: "Code Coding Computer Data Developing Development",
     image: "https://placedog.net/500/280",
     user: "Nature Code",
@@ -38,10 +42,16 @@ const data = [
 ];
 
 function VideoList() {
+  const [dogs, setDogs] = useState(data);
+  const deleteDog = (id) => {
+    const filteredArray = dogs.filter((dog) => dog.id !== id);
+
+    setDogs(filteredArray);
+  };
   return (
     <div className="video-grid">
-      {data.map((item) => (
-        <SingleVideo {...item} />
+      {dogs.map((item) => (
+        <SingleVideo key={item.id} {...item} deleteDog={deleteDog} />
       ))}
     </div>
   );
