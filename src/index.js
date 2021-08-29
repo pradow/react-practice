@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import ReactDom from "react-dom";
 import SingleVideo from "./SingleVideo";
+import reducer from "./reducer";
+import userEvent from "@testing-library/user-event";
 
 const data = [
   {
@@ -41,26 +43,33 @@ const data = [
   },
 ];
 
+const initialState = {
+  data,
+  randomDog: {},
+};
+
 function VideoList() {
-  const [dogs, setDogs] = useState(data);
-  const [fetchData, setFetchData] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  //const [dogs, setDogs] = useState(data);
+  //const [fetchData, setFetchData] = useState([]);
   const [inputTitle, setInputTitle] = useState("");
   const [inputName, setInputName] = useState("");
   const getData = async () => {
     const response = await fetch("https://dog.ceo/api/breeds/image/random");
     const dataObject = await response.json();
     console.log(dataObject);
-    setFetchData(dataObject);
+    //setFetchData(dataObject);
   };
 
   useEffect(() => {
-    getData();
-  }, [dogs]);
+    //getData();
+  }, []);
 
   const deleteDog = (id) => {
-    const filteredArray = dogs.filter((dog) => dog.id !== id);
+    //const filteredArray = state.data.filter((dog) => dog.id !== id);
 
-    setDogs(filteredArray);
+    //setDogs(filteredArray);
+    dispatch({ type: "DELETE_DOG", payload: id });
   };
 
   const handleSubmit = (e) => {
@@ -81,7 +90,7 @@ function VideoList() {
       avatar: "https://placedog.net/210/167",
     };
 
-    setDogs([...dogs, submitedData]);
+    //setDogs([...dogs, submitedData]);
 
     setInputTitle("");
     setInputName("");
@@ -106,10 +115,10 @@ function VideoList() {
         <button type="submit">add dog</button>
       </form>
       <div className="current-user">
-        <img src={fetchData.message} alt="A picture of a dog" />
+        <img src={state.randomDog.message} alt="A picture of a dog" />
       </div>
       <div className="video-grid">
-        {dogs.map((item) => (
+        {state.data.map((item) => (
           <SingleVideo key={item.id} {...item} deleteDog={deleteDog} />
         ))}
       </div>
