@@ -91,6 +91,7 @@ function VideoList() {
     };
 
     //setDogs([...dogs, submitedData]);
+    dispatch({ type: "ADD_DOG", payload: submitedData });
 
     setInputTitle("");
     setInputName("");

@@ -4,6 +4,10 @@ const reducer = (state, action) => {
     return { ...state, data: filteredArray };
   }
 
+  if (action.type === "ADD_DOG") {
+    return { ...state, data: [...state.data, action.payload] };
+  }
+
   return state;
 };
 
