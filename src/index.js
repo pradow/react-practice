@@ -2,7 +2,6 @@ import React, { useState, useEffect, useReducer } from "react";
 import ReactDom from "react-dom";
 import SingleVideo from "./SingleVideo";
 import reducer from "./reducer";
-import userEvent from "@testing-library/user-event";
 
 const data = [
   {
@@ -50,25 +49,19 @@ const initialState = {
 
 function VideoList() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  //const [dogs, setDogs] = useState(data);
-  //const [fetchData, setFetchData] = useState([]);
   const [inputTitle, setInputTitle] = useState("");
   const [inputName, setInputName] = useState("");
   const getData = async () => {
     const response = await fetch("https://dog.ceo/api/breeds/image/random");
     const dataObject = await response.json();
-    console.log(dataObject);
-    //setFetchData(dataObject);
+    dispatch({ type: "FETCH_RANDOM_DOG", payload: dataObject });
   };
 
   useEffect(() => {
-    //getData();
+    getData();
   }, []);
 
   const deleteDog = (id) => {
-    //const filteredArray = state.data.filter((dog) => dog.id !== id);
-
-    //setDogs(filteredArray);
     dispatch({ type: "DELETE_DOG", payload: id });
   };
 
@@ -90,7 +83,6 @@ function VideoList() {
       avatar: "https://placedog.net/210/167",
     };
 
-    //setDogs([...dogs, submitedData]);
     dispatch({ type: "ADD_DOG", payload: submitedData });
 
     setInputTitle("");

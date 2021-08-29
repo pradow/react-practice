@@ -8,6 +8,10 @@ const reducer = (state, action) => {
     return { ...state, data: [...state.data, action.payload] };
   }
 
+  if (action.type === "FETCH_RANDOM_DOG") {
+    return { ...state, randomDog: action.payload };
+  }
+
   return state;
 };
 
