@@ -1,12 +1,16 @@
 import React from "react";
 import { useGlobalContext } from "./context";
 import SingleVideo from "./SingleVideo";
+import useFetch from "./useFetch";
 
 function VideoList() {
   const { data, randomDog, dispatch } = useGlobalContext();
   const deleteDog = (id) => {
     dispatch({ type: "DELETE_DOG", payload: id });
   };
+
+  const url = "https://dog.ceo/api/breeds/image/random";
+  useFetch(url, dispatch);
 
   return (
     <div className="content">
